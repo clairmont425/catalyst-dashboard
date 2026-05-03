@@ -78,6 +78,15 @@
   .ratio-badge.big { background: #1a7f37; color: #fff; }
   .ratio-badge.med { background: #9a6700; color: #fff; }
   .ratio-badge.norm { background: #30363d; color: #c9d1d9; }
+  .status-badge {
+    display: inline-block; padding: 3px 9px; border-radius: 3px;
+    font-size: 10px; font-weight: bold; letter-spacing: 1px;
+    text-transform: uppercase; min-width: 56px; text-align: center;
+  }
+  .status-badge.active { background: #1a7f37; color: #fff; }
+  .status-badge.won    { background: #58a6ff; color: #0d1117; }
+  .status-badge.lost   { background: #5d2222; color: #f85149; }
+  .status-badge.ending { background: #9a6700; color: #fff; }
   .empty { text-align: center; padding: 40px; color: #6e7681; }
 </style>
 </head>
@@ -85,10 +94,10 @@
 
 <h1>Polymarket Active Trades — Followed Leaderboard</h1>
 <div class="meta">
-  Last refresh: <b>2026-05-03 04:16:27 PM</b> &middot;
-  Snapshot age: <b>1 min ago</b> &middot;
+  Last refresh: <b>2026-05-03 04:23:26 PM</b> &middot;
+  Snapshot age: <b>3 min ago</b> &middot;
   Auto-refresh: 5 min &middot;
-  <b>0</b> active positions across <b>1</b> followed trader(s) &middot;
+  <b>3</b> active positions across <b>1</b> followed trader(s) &middot;
   <a href="https://clairmont425.github.io/catalyst-dashboard/" style="color:#58a6ff">Catalyst Dashboard →</a>
 </div>
 
@@ -122,6 +131,7 @@
 <table id="positions">
   <thead>
     <tr>
+      <th class="sortable left" data-key="status" title="ACTIVE = market still open. WON/LOST = resolved. ENDING = past end date but price not yet pinned.">Status</th>
       <th class="sortable left" data-key="market_title" title="Polymarket market title — click row link to open">Market</th>
       <th class="sortable left" data-key="outcome" title="Side they bet on">Side</th>
       <th class="sortable left" data-key="trader_name" title="Which followed trader holds this position">Trader</th>
@@ -137,10 +147,10 @@
   <tbody id="rowsBody"></tbody>
 </table>
 
-<div class="empty">No active positions found. Wait for the leaderboard notifier to take its next snapshot.</div>
+
 
 <script>
-const ROWS = [];
+const ROWS = [{"status": "ACTIVE", "trader_name": "surfandturf", "trader_win_rate": 0.62, "trader_closed": 108, "trader_roi": 0.347, "wallet_short": "0x9f2fe025", "market_title": "Raptors vs. Cavaliers", "outcome": "Raptors", "entry_price": 0.26, "current_price": 0.255, "size_usd": 159375.0727, "initial_usd": 162500.0742, "size_vs_typical": 20.34437418027368, "trader_pnl_pct": -1.923, "trader_pnl_usd": -3125.0015, "end_date": "2026-05-03", "days_to_resolve": 0.0, "url": "https://polymarket.com/event/nba-tor-cle-2026-05-03", "score": 68.7}, {"status": "ACTIVE", "trader_name": "surfandturf", "trader_win_rate": 0.62, "trader_closed": 108, "trader_roi": 0.347, "wallet_short": "0x9f2fe025", "market_title": "Canadiens vs. Lightning", "outcome": "Lightning", "entry_price": 0.59, "current_price": 0.36, "size_usd": 7833.8646, "initial_usd": 12838.8337, "size_vs_typical": 1.0, "trader_pnl_pct": -38.983, "trader_pnl_usd": -5004.9691, "end_date": "2026-05-03", "days_to_resolve": 0.0, "url": "https://polymarket.com/event/nhl-mon-tb-2026-05-03", "score": 42.8}, {"status": "LOST", "trader_name": "surfandturf", "trader_win_rate": 0.62, "trader_closed": 108, "trader_roi": 0.347, "wallet_short": "0x9f2fe025", "market_title": "Magic vs. Pistons", "outcome": "Magic", "entry_price": 0.26, "current_price": 0.0005, "size_usd": 50.0001, "initial_usd": 26000.0642, "size_vs_typical": 0.006382558616088412, "trader_pnl_pct": -99.8076, "trader_pnl_usd": -25950.0641, "end_date": "2026-05-03", "days_to_resolve": 0.0, "url": "https://polymarket.com/event/nba-orl-det-2026-05-03", "score": 24.1}];
 
 function fmtMoney(v) {
   if (v == null) return '<span class="mute">--</span>';
@@ -181,7 +191,7 @@ function scoreBg(s) {
 
 function renderRows(rows) {
   if (!rows.length) {
-    return '<tr><td colspan="10" class="empty">No active positions match filters.</td></tr>';
+    return '<tr><td colspan="11" class="empty">No positions match filters.</td></tr>';
   }
   return rows.map(r => {
     const escTitle = (r.market_title || '').replace(/[<>&"']/g, c =>
@@ -189,8 +199,10 @@ function renderRows(rows) {
     const wrLabel = r.trader_win_rate != null
       ? Math.round(r.trader_win_rate * 100) + '%'
       : 'n/a';
+    const statusCls = (r.status || 'active').toLowerCase();
     return `
     <tr>
+      <td class="left"><span class="status-badge ${statusCls}">${r.status || 'ACTIVE'}</span></td>
       <td class="market left"><a href="${r.url}" target="_blank">${escTitle}</a></td>
       <td class="outcome left">${r.outcome}</td>
       <td class="left">${r.trader_name} <span class="mute">(${wrLabel})</span></td>
