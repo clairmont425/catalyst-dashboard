@@ -85,10 +85,10 @@
 
 <h1>Polymarket Active Trades — Followed Leaderboard</h1>
 <div class="meta">
-  Last refresh: <b>2026-05-03 02:02:45 PM</b> &middot;
-  Snapshot age: <b>12 min ago</b> &middot;
+  Last refresh: <b>2026-05-03 04:16:27 PM</b> &middot;
+  Snapshot age: <b>1 min ago</b> &middot;
   Auto-refresh: 5 min &middot;
-  <b>2</b> active positions across <b>1</b> followed trader(s) &middot;
+  <b>0</b> active positions across <b>1</b> followed trader(s) &middot;
   <a href="https://clairmont425.github.io/catalyst-dashboard/" style="color:#58a6ff">Catalyst Dashboard →</a>
 </div>
 
@@ -137,10 +137,10 @@
   <tbody id="rowsBody"></tbody>
 </table>
 
-
+<div class="empty">No active positions found. Wait for the leaderboard notifier to take its next snapshot.</div>
 
 <script>
-const ROWS = [{"trader_name": "surfandturf", "trader_win_rate": 0.62, "trader_closed": 108, "trader_roi": 0.347, "wallet_short": "0x9f2fe025", "market_title": "Raptors vs. Cavaliers", "outcome": "Raptors", "entry_price": 0.26, "current_price": 0.265, "size_usd": 9545.6596, "initial_usd": 9365.5528, "size_vs_typical": 0.7777868157956453, "trader_pnl_pct": 1.923, "trader_pnl_usd": 180.1067, "end_date": "2026-05-03", "days_to_resolve": -0.9, "url": "https://polymarket.com/event/nba-tor-cle-2026-05-03", "score": 53.2}, {"trader_name": "surfandturf", "trader_win_rate": 0.62, "trader_closed": 108, "trader_roi": 0.347, "wallet_short": "0x9f2fe025", "market_title": "Magic vs. Pistons", "outcome": "Magic", "entry_price": 0.26, "current_price": 0.15, "size_usd": 15000.037, "initial_usd": 26000.0642, "size_vs_typical": 1.2222131842043544, "trader_pnl_pct": -42.3076, "trader_pnl_usd": -11000.0272, "end_date": "2026-05-03", "days_to_resolve": -0.9, "url": "https://polymarket.com/event/nba-orl-det-2026-05-03", "score": 38.3}];
+const ROWS = [];
 
 function fmtMoney(v) {
   if (v == null) return '<span class="mute">--</span>';
