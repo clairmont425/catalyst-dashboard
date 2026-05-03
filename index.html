@@ -169,7 +169,7 @@
 
 <h1>Government Contract Catalyst Dashboard</h1>
 <div class="meta">
-  Last refresh: <b>2026-05-03 01:03:30 PM</b> ·
+  Last refresh: <b>2026-05-03 01:19:00 PM</b> ·
   Data window: last <b>7 days</b> ·
   Source: <a href="https://api.usaspending.gov/" style="color:#58a6ff">USAspending.gov</a> ·
   Auto-refreshes every 5 min ·
@@ -177,14 +177,75 @@
 </div>
 
 <div class="legend">
-  <b>Conviction score</b> (0-100) combines: <span class="key">%Cap</span> of awards,
-  <span class="key">low recent moves</span> (not priced in), <span class="key">volume ratio</span> >1
-  (real interest), <span class="key">multiple awards</span> (recurring contractor),
-  and <span class="key">short interest %</span> (squeeze fuel). Higher = cleaner setup.<br>
-  <b>1d / 5d / 30d</b> = price change. Big positive = catalyst likely already priced in.
-  <b>VolX</b> = today's volume ÷ 30-day avg.
-  <b>52w%</b> = position in 52-week range (0=at low, 100=at high).
-  <b>SI%</b> = short interest as % of float.
+  <div style="font-size:13px; color:#c9d1d9; line-height:1.5;">
+    <b style="color:#58a6ff;">What this is:</b>
+    a list of small/mid-cap public companies that just won a federal government
+    contract. The contract is the catalyst. The other columns tell you whether
+    the market has already reacted — or whether the trade is still in front of you.
+  </div>
+
+  <div style="margin-top:14px; padding:10px 12px; background:#0d1117; border-left:3px solid #56d364; border-radius:3px;">
+    <b style="color:#56d364;">A clean setup looks like this:</b>
+    <ol style="margin:6px 0 0 18px; padding:0; color:#c9d1d9; line-height:1.7;">
+      <li><b>Score &gt; 60</b> — composite of all the signals below</li>
+      <li><b>%Cap &gt; 2%</b> — the contract is meaningful next to company size</li>
+      <li><b>1d / 5d / 30d near zero or negative</b> — stock hasn't moved yet,
+          so the catalyst isn't priced in</li>
+      <li><b>VolX &gt; 1x ideally &gt; 2x</b> — volume is starting to confirm interest</li>
+      <li><b>SI% elevated (5%+)</b> — adds squeeze fuel <i>if</i> the catalyst hits</li>
+    </ol>
+    <span style="color:#8b949e; font-size:11.5px;">
+      The asymmetry: a real catalyst already happened (contract won), but the price
+      hasn't reflected it yet. The market just hasn't connected the dots.
+    </span>
+  </div>
+
+  <div style="margin-top:14px; padding:10px 12px; background:#0d1117; border-left:3px solid #f85149; border-radius:3px;">
+    <b style="color:#f85149;">Already-priced-in (skip these):</b>
+    <ul style="margin:6px 0 0 18px; padding:0; color:#c9d1d9; line-height:1.7;">
+      <li><b>5d or 30d &gt; +15%</b> — stock already ripped on the news</li>
+      <li><b>52w% &gt; 80%</b> — extended near 52-week highs</li>
+      <li><b>VolX &gt; 5x with positive 5d</b> — the rip already happened</li>
+    </ul>
+    <span style="color:#8b949e; font-size:11.5px;">
+      You're chasing. The expected value left in the move shrinks fast once
+      the broader market has priced in the catalyst.
+    </span>
+  </div>
+
+  <div style="margin-top:14px;">
+    <b style="color:#58a6ff;">Column reference:</b>
+    <table style="margin-top:6px; border-collapse:collapse; font-size:11.5px; line-height:1.45;">
+      <tr style="color:#8b949e;">
+        <td style="padding:4px 14px 4px 0; vertical-align:top;"><b style="color:#f0883e;">Score</b></td>
+        <td style="padding:4px 0;">0–100. Combines all signals below. >60 = clean setup, 30–60 = mixed, <30 = stale or weak.</td>
+      </tr>
+      <tr style="color:#8b949e;">
+        <td style="padding:4px 14px 4px 0; vertical-align:top;"><b style="color:#f0883e;">%Cap</b></td>
+        <td style="padding:4px 0;">Sum of awards as % of market cap. The bigger, the more the contract should move the stock. >5% is large, >2% is meaningful, <1% is noise.</td>
+      </tr>
+      <tr style="color:#8b949e;">
+        <td style="padding:4px 14px 4px 0; vertical-align:top;"><b style="color:#f0883e;">1d / 5d / 30d</b></td>
+        <td style="padding:4px 0;">% price change. <b>Negative or near zero = catalyst not priced in (good).</b> Big positive = market already reacted (bad).</td>
+      </tr>
+      <tr style="color:#8b949e;">
+        <td style="padding:4px 14px 4px 0; vertical-align:top;"><b style="color:#f0883e;">VolX</b></td>
+        <td style="padding:4px 0;">Today's volume ÷ 30-day avg. >2x = real interest building. <1x = market hasn't noticed yet (could be why it's not priced in).</td>
+      </tr>
+      <tr style="color:#8b949e;">
+        <td style="padding:4px 14px 4px 0; vertical-align:top;"><b style="color:#f0883e;">52w%</b></td>
+        <td style="padding:4px 0;">Position in 52-week range. 0 = at the low, 100 = at the high. Mid-range is a base; >80 is extended.</td>
+      </tr>
+      <tr style="color:#8b949e;">
+        <td style="padding:4px 14px 4px 0; vertical-align:top;"><b style="color:#f0883e;">SI%</b></td>
+        <td style="padding:4px 0;">Short interest as % of float. <b>By itself bearish</b> (shorts have a thesis). With a positive catalyst it amplifies the move via forced covering. >20% = high squeeze potential.</td>
+      </tr>
+      <tr style="color:#8b949e;">
+        <td style="padding:4px 14px 4px 0; vertical-align:top;"><b style="color:#f0883e;">#Awd</b></td>
+        <td style="padding:4px 0;">Number of separate awards in the window. Multiple awards = recurring contractor with a real revenue relationship, not a one-off.</td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 <div class="filters">
@@ -197,9 +258,11 @@
   <label>Cap:
     <select id="capFilter">
       <option value="">all</option>
-      <option value="micro">micro</option>
-      <option value="small">small</option>
-      <option value="mid">mid</option>
+      <option value="micro">micro (&lt;$300M)</option>
+      <option value="small">small ($300M–$2B)</option>
+      <option value="mid">mid ($2B–$10B)</option>
+      <option value="large">large ($10B–$200B)</option>
+      <option value="mega">mega (&gt;$200B)</option>
     </select>
   </label>
 </div>
