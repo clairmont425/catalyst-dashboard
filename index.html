@@ -57,6 +57,8 @@
     white-space: nowrap;
   }
   th.sortable:hover { color: #f0883e; }
+  th[title] { border-bottom: 1px dotted #58a6ff; }
+  th[title]:hover { border-bottom-color: #f0883e; }
   th:first-child, td:first-child { text-align: left; }
   th.left { text-align: left; }
   td {
@@ -167,7 +169,7 @@
 
 <h1>Government Contract Catalyst Dashboard</h1>
 <div class="meta">
-  Last refresh: <b>2026-05-03 12:58:39 PM</b> ·
+  Last refresh: <b>2026-05-03 01:03:30 PM</b> ·
   Data window: last <b>7 days</b> ·
   Source: <a href="https://api.usaspending.gov/" style="color:#58a6ff">USAspending.gov</a> ·
   Auto-refreshes every 5 min ·
@@ -205,22 +207,38 @@
 <table id="catalysts">
   <thead>
     <tr>
-      <th class="sortable left" data-key="ticker">Ticker</th>
-      <th class="sortable left" data-key="sector">Sector</th>
-      <th class="sortable" data-key="score">Score</th>
-      <th class="sortable" data-key="mc">Mkt Cap</th>
-      <th class="sortable" data-key="n">#Awd</th>
-      <th class="sortable" data-key="tot_amt">Total $</th>
-      <th class="sortable" data-key="max_amt">Max $</th>
-      <th class="sortable" data-key="pct_cap">%Cap</th>
-      <th class="sortable" data-key="price">Price</th>
-      <th class="sortable" data-key="d1">1d</th>
-      <th class="sortable" data-key="d5">5d</th>
-      <th class="sortable" data-key="d30">30d</th>
-      <th class="sortable" data-key="vol_x">VolX</th>
-      <th class="sortable" data-key="range52">52w%</th>
-      <th class="sortable" data-key="shortf">SI%</th>
-      <th class="left">Top Contract</th>
+      <th class="sortable left" data-key="ticker"
+          title="Stock ticker — clicks open Yahoo Finance">Ticker</th>
+      <th class="sortable left" data-key="sector"
+          title="GICS sector classification">Sector</th>
+      <th class="sortable" data-key="score"
+          title="Conviction score 0-100. Combines award size as % of market cap, low recent price moves (not priced in), volume confirmation, multiple awards, and short interest. Higher = cleaner setup.">Score</th>
+      <th class="sortable" data-key="mc"
+          title="Market capitalization in billions">Mkt Cap</th>
+      <th class="sortable" data-key="n"
+          title="# of separate contract awards in the time window. Higher = recurring contractor with real revenue relationship, not a one-off.">#Awd</th>
+      <th class="sortable" data-key="tot_amt"
+          title="Sum of all award values in the window (USD)">Total $</th>
+      <th class="sortable" data-key="max_amt"
+          title="Largest single award value">Max $</th>
+      <th class="sortable" data-key="pct_cap"
+          title="Total awards as % of market cap. The bigger the more the contract should move the stock.">%Cap</th>
+      <th class="sortable" data-key="price"
+          title="Latest closing price">Price</th>
+      <th class="sortable" data-key="d1"
+          title="1-day price change %. Big positive number = catalyst may already be priced in.">1d</th>
+      <th class="sortable" data-key="d5"
+          title="5-day price change %. Big positive number = catalyst may already be priced in.">5d</th>
+      <th class="sortable" data-key="d30"
+          title="30-day price change %. Big positive number = catalyst may already be priced in.">30d</th>
+      <th class="sortable" data-key="vol_x"
+          title="Today's volume ÷ 30-day average. >2x confirms a real news-driven move. <1x = quiet, news not yet noticed.">VolX</th>
+      <th class="sortable" data-key="range52"
+          title="Position in 52-week range — 0% = at 52w low, 100% = at 52w high">52w%</th>
+      <th class="sortable" data-key="shortf"
+          title="Short Interest as % of float. % of freely-tradable shares currently sold short. >20% = high squeeze potential — shorts panic-covering on positive news amplifies moves. 5-15% = elevated. <5% = normal.">SI%</th>
+      <th class="left"
+          title="Most recent contract description — click to expand all awards">Top Contract</th>
     </tr>
   </thead>
   <tbody id="rowsBody">
