@@ -88,7 +88,14 @@
   .status-badge.lost   { background: #5d2222; color: #f85149; }
   .status-badge.ending { background: #9a6700; color: #fff; }
   .empty { text-align: center; padding: 40px; color: #6e7681; }
-</style>
+
+    .market-link { color: #58a6ff; text-decoration: none; }
+    .market-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .market-link { padding: 8px 4px; display: inline-block; }
+    }
+
+  </style>
 </head>
 <body>
 
@@ -203,7 +210,7 @@ function renderRows(rows) {
     return `
     <tr>
       <td class="left"><span class="status-badge ${statusCls}">${r.status || 'ACTIVE'}</span></td>
-      <td class="market left"><a href="${r.url}" target="_blank">${escTitle}</a></td>
+      <td class="market left"><a href="${r.url}" class="market-link">${escTitle}</a></td>
       <td class="outcome left">${r.outcome}</td>
       <td class="left">${r.trader_name} <span class="mute">(${wrLabel})</span></td>
       <td class="score"><span class="score-cell" style="background:${scoreBg(r.score)}">${r.score.toFixed(0)}</span></td>
@@ -259,6 +266,20 @@ document.querySelectorAll('th.sortable').forEach(th => {
 });
 
 applyFilters();
-</script>
+
+    // Mobile deep link: navigate directly so iOS/Android can intercept
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('.market-link');
+      if (!link) return;
+      var url = link.href;
+      if (!url || url.indexOf('polymarket.com') === -1) return;
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        e.preventDefault();
+        window.location.href = url;
+      }
+    });
+
+  </script>
 </body>
 </html>
