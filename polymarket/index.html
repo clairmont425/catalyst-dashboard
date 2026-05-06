@@ -267,16 +267,38 @@ document.querySelectorAll('th.sortable').forEach(th => {
 
 applyFilters();
 
-    // Mobile deep link: navigate directly so iOS/Android can intercept
+    // Mobile: try Polymarket app, fall back to web
     document.addEventListener('click', function(e) {
       var link = e.target.closest('.market-link');
       if (!link) return;
-      var url = link.href;
-      if (!url || url.indexOf('polymarket.com') === -1) return;
+      var webUrl = link.href;
+      if (!webUrl || webUrl.indexOf('polymarket.com') === -1) return;
+
       var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        e.preventDefault();
-        window.location.href = url;
+      if (!isMobile) return; // desktop: default browser nav
+
+      e.preventDefault();
+
+      // Extract the path after polymarket.com
+      var path = webUrl.replace('https://polymarket.com', '');
+      var isAndroid = /Android/i.test(navigator.userAgent);
+
+      if (isAndroid) {
+        // Android: use intent:// to try the app, fallback to web
+        var intent = 'intent:/' + path + '#Intent;' +
+          'scheme=https;' +
+          'package=com.polymarket.android;' +
+          'S.browser_fallback_url=' + encodeURIComponent(webUrl) + ';end';
+        window.location.href = intent;
+      } else {
+        // iOS: try universal link by navigating directly
+        // Set a timer — if the page is still visible after 1.5s, app didn't open
+        var start = Date.now();
+        window.location.href = webUrl;
+        setTimeout(function() {
+          // If we're still here, app didn't intercept — already on the web page
+          if (Date.now() - start < 2000) return;
+        }, 1500);
       }
     });
 
