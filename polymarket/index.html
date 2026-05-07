@@ -130,10 +130,20 @@
   <label>Min size $:
     <input type="number" id="minSize" value="0" min="0" style="width:80px">
   </label>
+  <label>Status:
+    <select id="statusFilter">
+      <option value="ACTIVE">Active Only</option>
+      <option value="all">All</option>
+      <option value="WON">Won</option>
+      <option value="LOST">Lost</option>
+    </select>
+  </label>
   <label>Trader:
     <select id="traderFilter"><option value="">all</option><option value="newdogbeginning">newdogbeginning</option><option value="surfandturf">surfandturf</option></select>
   </label>
 </div>
+
+<div id="traderStats" style="display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;"></div>
 
 <table id="positions">
   <thead>
