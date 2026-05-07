@@ -229,7 +229,9 @@ function applyFilters() {
   const minScore = parseFloat(document.getElementById('minScore').value) || 0;
   const minSize  = parseFloat(document.getElementById('minSize').value) || 0;
   const trader   = document.getElementById('traderFilter').value;
+  const statusVal = document.getElementById('statusFilter').value;
   const filtered = ROWS.filter(r => {
+    if (statusVal !== 'all' && r.status !== statusVal) return false;
     if (r.score < minScore) return false;
     if (r.size_usd < minSize) return false;
     if (trader && r.trader_name !== trader) return false;
@@ -239,7 +241,52 @@ function applyFilters() {
     }
     return true;
   });
+  // Sort: ACTIVE first, then WON, then LOST
+  const statusOrder = { ACTIVE: 0, WON: 1, LOST: 2 };
+  filtered.sort((a, b) => {
+    const sa = statusOrder[a.status] ?? 3, sb = statusOrder[b.status] ?? 3;
+    if (sa !== sb) return sa - sb;
+    return (b.score || 0) - (a.score || 0);
+  });
   document.getElementById('rowsBody').innerHTML = renderRows(filtered);
+  // Update trader stats
+  updateTraderStats();
+}
+
+function updateTraderStats() {
+  const traders = {};
+  ROWS.forEach(r => {
+    if (!traders[r.trader_name]) {
+      traders[r.trader_name] = { 
+        name: r.trader_name, winRate: r.trader_win_rate, closed: r.trader_closed,
+        roi: r.trader_roi, active: 0, won: 0, lost: 0, 
+        totalPnl: 0, activePnl: 0, activeSize: 0 
+      };
+    }
+    const t = traders[r.trader_name];
+    t.totalPnl += r.trader_pnl_usd || 0;
+    if (r.status === 'ACTIVE') { t.active++; t.activePnl += r.trader_pnl_usd || 0; t.activeSize += r.size_usd || 0; }
+    else if (r.status === 'WON') t.won++;
+    else if (r.status === 'LOST') t.lost++;
+  });
+  const el = document.getElementById('traderStats');
+  el.innerHTML = Object.values(traders).map(t => {
+    const pnlColor = t.totalPnl >= 0 ? '#4ade80' : '#f87171';
+    const activePnlColor = t.activePnl >= 0 ? '#4ade80' : '#f87171';
+    return '<div style="background:#1a1f2e;border:1px solid #2d3548;border-radius:8px;padding:10px 14px;flex:1;min-width:280px">' +
+      '<div style="font-weight:700;color:#e2e8f0;font-size:14px;margin-bottom:6px">' + t.name + '</div>' +
+      '<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:#94a3b8">' +
+      '<span>Win: <b style="color:#4ade80">' + (t.winRate * 100).toFixed(0) + '%</b> (' + t.closed + ' closed)</span>' +
+      '<span>ROI: <b style="color:#58a6ff">' + (t.roi * 100).toFixed(1) + '%</b></span>' +
+      '<span>Active: <b style="color:#e2e8f0">' + t.active + '</b></span>' +
+      '<span>Won: <b style="color:#4ade80">' + t.won + '</b></span>' +
+      '<span>Lost: <b style="color:#f87171">' + t.lost + '</b></span>' +
+      '</div>' +
+      '<div style="display:flex;gap:12px;margin-top:4px;font-size:12px;color:#94a3b8">' +
+      '<span>Active P&L: <b style="color:' + activePnlColor + '">$' + t.activePnl.toLocaleString(undefined, {maximumFractionDigits:0}) + '</b></span>' +
+      '<span>Active Size: <b style="color:#e2e8f0">$' + t.activeSize.toLocaleString(undefined, {maximumFractionDigits:0}) + '</b></span>' +
+      '</div></div>';
+  }).join('');
 }
 
 let sortKey = 'score';
@@ -261,7 +308,7 @@ function sortBy(key) {
 document.querySelectorAll('th.sortable').forEach(th => {
   th.addEventListener('click', () => sortBy(th.dataset.key));
 });
-['search', 'minScore', 'minSize', 'traderFilter'].forEach(id => {
+['search', 'minScore', 'minSize', 'traderFilter', 'statusFilter'].forEach(id => {
   document.getElementById(id).addEventListener('input', applyFilters);
 });
 
