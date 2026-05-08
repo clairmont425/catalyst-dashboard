@@ -169,11 +169,11 @@
 
 <h1>Government Contract Catalyst Dashboard</h1>
 <div class="meta">
-  Last refresh: <b>2026-05-03 01:19:00 PM</b> ·
+  Last refresh: <b>2026-05-07 11:00:03 AM</b> ·
   Data window: last <b>7 days</b> ·
   Source: <a href="https://api.usaspending.gov/" style="color:#58a6ff">USAspending.gov</a> ·
   Auto-refreshes every 5 min ·
-  <b>3</b> small/mid-cap tickers from <b>10</b> awards
+  <b>0</b> small/mid-cap tickers from <b>0</b> awards
 </div>
 
 <div class="legend">
@@ -309,10 +309,10 @@
   </tbody>
 </table>
 
-
+<div class='empty'>No small/mid-cap catalysts in this window — try widening the date range.</div>
 
 <script>
-const ROWS = [{"ticker": "SAIC", "company": "SCIENCE APPLICATIONS INTERNATIONAL CORPORATION", "mc": 4133950095, "cap_cls": "mid", "n": 5, "tot_amt": 346723257, "max_amt": 96111961, "pct_cap": 8.38, "price": 95.91, "d1": -0.89, "d5": 0.31, "d30": -1.06, "vol_x": 0.88, "range52": 34.5, "shortf": 7.6, "sector": "Technology", "industry": "Information Technology Services", "agency": "Department of Homeland Security", "details": [{"amt": 96111961, "pct": 2.32, "agency": "Department of Homeland Security", "desc": "IT SERVICE AND SUPPORT", "date": "2024-03-02", "url": "https://www.usaspending.gov/award/CONT_AWD_70B04C24F00000184_7014_47QTCK18D0001_4732"}, {"amt": 88421798, "pct": 2.14, "agency": "National Aeronautics and Space Administration", "desc": "NATIONAL CENTER FOR CRITICAL INFORMATION PROCESSING AND STORAGE (NCCIPS)", "date": "2019-10-01", "url": "https://www.usaspending.gov/award/CONT_AWD_80NSSC19C0050_8000_-NONE-_-NONE-"}, {"amt": 74873222, "pct": 1.81, "agency": "Department of Transportation", "desc": "SURVEILLANCE AND BROADCAST SERVICES (SBS) SUPPORT", "date": "2024-01-18", "url": "https://www.usaspending.gov/award/CONT_AWD_693KA924F00033_6920_693KA918D00010_6920"}, {"amt": 66472289, "pct": 1.61, "agency": "General Services Administration", "desc": "NORAD  USNORTHCOM INFORMATION TECHNOLOGY IT ENTERPRISE SERVICES (NITES) BASE AWARD.", "date": "2024-09-01", "url": "https://www.usaspending.gov/award/CONT_AWD_47QFCA24F0038_4732_47QTCK18D0001_4732"}, {"amt": 20843987, "pct": 0.5, "agency": "Department of Transportation", "desc": "COOPERATIVE SURVEILLANCE SYSTEMS AND SENSORY PROGRAMS (AJM-41)", "date": "2024-01-04", "url": "https://www.usaspending.gov/award/CONT_AWD_693KA924F00043_6920_693KA918D00010_6920"}], "score": 73.0}, {"ticker": "GEO", "company": "THE GEO GROUP, INC.", "mc": 2488261631, "cap_cls": "mid", "n": 4, "tot_amt": 143060562, "max_amt": 51004000, "pct_cap": 5.75, "price": 18.75, "d1": 1.3, "d5": -0.42, "d30": 8.19, "vol_x": 0.94, "range52": 32.5, "shortf": 10.38, "sector": "Industrials", "industry": "Security & Protection Services", "agency": "Department of Homeland Security", "details": [{"amt": 51004000, "pct": 2.05, "agency": "Department of Homeland Security", "desc": "DETENTION AND TRANSPORTATION SERVICES AT ADELANTO ICE PROCESSING CENTER FOR LOS ANGELES AREA OF RESPONSIBILITY", "date": "2025-12-20", "url": "https://www.usaspending.gov/award/CONT_AWD_70CDCR26FR0000028_7012_70CDCR20D00000009_7012"}, {"amt": 39812835, "pct": 1.6, "agency": "Department of Homeland Security", "desc": "THIS IS A NEW TASK ORDER TO OBLIGATE FUNDING FOR HOUSING AND SAFEGUARDING ILLEGAL ALIENS IN SUPPORT OF ENFORCEMENT AND REMOVAL OPERATIONS (ERO) AT BROWARD TRANSITIONAL CENTER IN POMPANO, FL.", "date": "2025-09-01", "url": "https://www.usaspending.gov/award/CONT_AWD_70CDCR25FR0000100_7012_70CDCR21D00000004_7012"}, {"amt": 34270827, "pct": 1.38, "agency": "Department of Homeland Security", "desc": "DETENTION SERVICES DESERT VIEW (DV) ANNEX IN THE LOS ANGELES AREA OF RESPONSIBILITY", "date": "2024-12-20", "url": "https://www.usaspending.gov/award/CONT_AWD_70CDCR25FR0000010_7012_70CDCR20D00000009_7012"}, {"amt": 17972900, "pct": 0.72, "agency": "Department of Homeland Security", "desc": "DETENTION SERVICES AT THE DESERT VIEW ANNEX LOCATED IN ADELANTO, CA FOR LOS ANGELES AREA OF RESPONSIBILITY", "date": "2025-12-20", "url": "https://www.usaspending.gov/award/CONT_AWD_70CDCR26FR0000031_7012_70CDCR20D00000009_7012"}], "score": 56.4}, {"ticker": "LUMN", "company": "LUMEN TECHNOLOGIES GOVERNMENT SOLUTIONS, INC.", "mc": 9601077390, "cap_cls": "mid", "n": 1, "tot_amt": 134884822, "max_amt": 134884822, "pct_cap": 1.4, "price": 9.32, "d1": 5.43, "d5": 5.43, "d30": 31.82, "vol_x": 0.9, "range52": 69.3, "shortf": 6.55, "sector": "Communication Services", "industry": "Telecom Services", "agency": "Department of Agriculture", "details": [{"amt": 134884822, "pct": 1.4, "agency": "Department of Agriculture", "desc": "USDANET ENTERPRISE INFRASTRUCTURE SOLUTIONS", "date": "2021-12-16", "url": "https://www.usaspending.gov/award/CONT_AWD_12314422F0069_1205_GS00Q17NSD3006_4732"}], "score": 13.6}];
+const ROWS = [];
 
 function fmtMoneyM(v) {
   if (v == null) return '<span class="mute">--</span>';
