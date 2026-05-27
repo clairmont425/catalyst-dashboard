@@ -176,10 +176,10 @@
 
 <h1>Polymarket Active Trades — Followed Leaderboard</h1>
 <div class="meta">
-  Last refresh: <b>2026-05-26 11:21:22 PM</b> &middot;
-  Snapshot age: <b>5s ago</b> &middot;
+  Last refresh: <b>2026-05-26 11:23:13 PM</b> &middot;
+  Snapshot age: <b>1 min ago</b> &middot;
   Auto-refresh: 5 min &middot;
-  <b>0</b> total positions across <b>2</b> followed trader(s) &middot;
+  <b>2</b> total positions across <b>2</b> followed trader(s) &middot;
   <span id="filterCount">&mdash;</span> &middot;
   Visits: <b id="visitCount">&mdash;</b> &middot;
   <a href="https://clairmont425.github.io/catalyst-dashboard/" style="color:#58a6ff">Catalyst Dashboard →</a>
@@ -250,10 +250,10 @@
   <tbody id="rowsBody"></tbody>
 </table>
 
-<div class="empty">No active positions found. Wait for the leaderboard notifier to take its next snapshot.</div>
+
 
 <script>
-const ROWS = [];
+const ROWS = [{"status": "PARTIAL", "trader_name": "Oddn", "trader_win_rate": 0.8041, "trader_closed": 245, "trader_roi": 5.4307106677922405, "wallet_short": "0xa53c2644", "market_title": "Will England win the 2026 FIFA World Cup?", "outcome": "Yes", "entry_price": 0.0166, "current_price": 0.1125, "size_usd": 2.25, "initial_usd": 0.3333, "size_vs_typical": 1.371951219512195, "trader_pnl_pct": 575.003, "trader_pnl_usd": 1.9166, "trader_realized": 6.37, "end_date": "2026-07-20", "days_to_resolve": 54.7, "us_search_url": "https://polymarket.us/?q=England+win+2026+FIFA", "us_link_kind": "search", "us_match_title": null, "us_match_question": null, "com_event_url": "https://polymarket.com/event/2026-fifa-world-cup-winner-595", "url": "https://polymarket.us/?q=England+win+2026+FIFA", "condition_id": "0x375409bc5eeeff961e82b479caeccc20f33d15738e5bce1186d628aa3d9dfb1f", "score": 54.4}, {"status": "PARTIAL", "trader_name": "Oddn", "trader_win_rate": 0.8041, "trader_closed": 245, "trader_roi": 5.4307106677922405, "wallet_short": "0xa53c2644", "market_title": "Will Germany win the 2026 FIFA World Cup?", "outcome": "Yes", "entry_price": 0.0166, "current_price": 0.0515, "size_usd": 1.03, "initial_usd": 0.3333, "size_vs_typical": 0.6280487804878049, "trader_pnl_pct": 208.9883, "trader_pnl_usd": 0.6966, "trader_realized": 2.455, "end_date": "2026-07-20", "days_to_resolve": 54.7, "us_search_url": "https://polymarket.us/?q=Germany+win+2026+FIFA", "us_link_kind": "search", "us_match_title": null, "us_match_question": null, "com_event_url": "https://polymarket.com/event/2026-fifa-world-cup-winner-595", "url": "https://polymarket.us/?q=Germany+win+2026+FIFA", "condition_id": "0x1595b4818eeb1ea1e0bec5de6f057218e557feee9b405a0e930d290384fa1d16", "score": 46.6}];
 
 function fmtMoney(v) {
   if (v == null) return '<span class="mute">--</span>';
