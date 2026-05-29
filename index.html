@@ -169,11 +169,11 @@
 
 <h1>Government Contract Catalyst Dashboard</h1>
 <div class="meta">
-  Last refresh: <b>2026-05-27 11:00:10 AM</b> ·
+  Last refresh: <b>2026-05-29 11:00:32 AM</b> ·
   Data window: last <b>7 days</b> ·
   Source: <a href="https://api.usaspending.gov/" style="color:#58a6ff">USAspending.gov</a> ·
   Auto-refreshes every 5 min ·
-  <b>0</b> small/mid-cap tickers from <b>0</b> awards
+  <b>4</b> small/mid-cap tickers from <b>5</b> awards
 </div>
 
 <div class="legend">
@@ -309,10 +309,10 @@
   </tbody>
 </table>
 
-<div class='empty'>No small/mid-cap catalysts in this window — try widening the date range.</div>
+
 
 <script>
-const ROWS = [];
+const ROWS = [{"ticker": "AMRC", "company": "AMERESCO INC", "mc": 1935903878, "cap_cls": "small", "n": 1, "tot_amt": 217262240, "max_amt": 217262240, "pct_cap": 11.22, "price": 35.87, "d1": -1.9, "d5": 18.68, "d30": 31.42, "vol_x": 0.42, "range52": 71.6, "shortf": 14.53, "sector": "Industrials", "industry": "Engineering & Construction", "agency": "General Services Administration", "details": [{"amt": 217262240, "pct": 11.22, "agency": "General Services Administration", "desc": "ENERGY SAVINGS PERFORMANCE CONTRACT, NATIONAL DEEP ENERGY RETROFIT PROGRAM ROUND 7, REGION 5 FOR IMPLEMENTATION OF ENERGY CONSERVATION MEASURES AT THE BEAN FEDERAL CENTER, INDIANAPOLIS AND 24 OTHER BUILDINGS INDIANA, ILLINOIS, MINNESOTA AND WISCONSIN", "date": "2025-01-16", "url": "https://www.usaspending.gov/award/CONT_AWD_47PF0025F0227_4740_DEEE0008027_8900"}], "score": 50.0}, {"ticker": "FLY", "company": "FIREFLY AEROSPACE INC.", "mc": 7910812492, "cap_cls": "mid", "n": 1, "tot_amt": 108229327, "max_amt": 108229327, "pct_cap": 1.37, "price": 45.96, "d1": -6.91, "d5": 7.23, "d30": 37.23, "vol_x": 2.02, "range52": 51.8, "shortf": 9.78, "sector": "Industrials", "industry": "Aerospace & Defense", "agency": "National Aeronautics and Space Administration", "details": [{"amt": 108229327, "pct": 1.37, "agency": "National Aeronautics and Space Administration", "desc": "COMMERCIAL LUNAR PAYLOAD SERVICES (CLPS)", "date": "2024-12-18", "url": "https://www.usaspending.gov/award/CONT_AWD_80JSC025F7026_8000_80HQTR19D0009_8000"}], "score": 24.8}, {"ticker": "HURN", "company": "HURON CONSULTING SERVICES LLC", "mc": 1733855062, "cap_cls": "small", "n": 1, "tot_amt": 5284388, "max_amt": 5284388, "pct_cap": 0.3, "price": 107.7, "d1": 0.7, "d5": 2.27, "d30": -16.17, "vol_x": 0.26, "range52": 8.8, "shortf": 3.94, "sector": "Industrials", "industry": "Consulting Services", "agency": "Nuclear Regulatory Commission", "details": [{"amt": 5284388, "pct": 0.3, "agency": "Nuclear Regulatory Commission", "desc": "BUDGET FORMULATION SYSTEM (BFS) OPERATIONS, MAINTENANCE AND ENHANCEMENT CONTRACTOR SUPPORT", "date": "2021-08-23", "url": "https://www.usaspending.gov/award/CONT_AWD_31310021F0094_3100_GS35F291CA_4732"}], "score": 20.9}, {"ticker": "SAIC", "company": "SCIENCE APPLICATIONS INTERNATIONAL CORPORATION", "mc": 4469717400, "cap_cls": "mid", "n": 2, "tot_amt": 21942109, "max_amt": 13062343, "pct_cap": 0.49, "price": 105.59, "d1": 1.82, "d5": 9.8, "d30": 11.0, "vol_x": 0.61, "range52": 61.3, "shortf": 7.5, "sector": "Technology", "industry": "Information Technology Services", "agency": "Department of the Interior", "details": [{"amt": 13062343, "pct": 0.29, "agency": "Department of the Interior", "desc": "METADATA DEVELOPMENT, CURATION, HARMONIZATION, AND PROGRAM SUPPORT SERVICES", "date": "2020-12-01", "url": "https://www.usaspending.gov/award/CONT_AWD_140D0421F0008_1406_HHSN316201200012W_7529"}, {"amt": 8879766, "pct": 0.2, "agency": "General Services Administration", "desc": "IGF::OT::IGF MEDICAL CODING COMPLIANCE SERVICES SUBJECT TO THE AVAILABILITY OF FUNDS", "date": "2017-10-01", "url": "https://www.usaspending.gov/award/CONT_AWD_GSQ0717BG0070_4732_GS00Q14OADU205_4732"}], "score": 14.9}];
 
 function fmtMoneyM(v) {
   if (v == null) return '<span class="mute">--</span>';
