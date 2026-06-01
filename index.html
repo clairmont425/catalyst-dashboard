@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="300">
-<title>Government Contract Catalyst Dashboard</title>
+<title>Government Contracts</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -167,13 +167,14 @@
 </head>
 <body>
 
-<h1>Government Contract Catalyst Dashboard</h1>
+<h1>Government Contracts</h1>
 <div class="meta">
-  Last refresh: <b>2026-06-01 11:00:04 AM</b> ·
+  Last refresh: <b>2026-06-01 04:08:18 PM</b> ·
   Data window: last <b>7 days</b> ·
   Source: <a href="https://api.usaspending.gov/" style="color:#58a6ff">USAspending.gov</a> ·
   Auto-refreshes every 5 min ·
-  <b>0</b> small/mid-cap tickers from <b>0</b> awards
+  <b>0</b> small/mid-cap tickers from <b>0</b> awards ·
+  Visits: <b id="visitCount">&mdash;</b>
 </div>
 
 <div class="legend">
@@ -420,6 +421,24 @@ document.querySelectorAll('th.sortable').forEach(th => {
 
 // Initial render
 applyFilters();
+
+// ── Visit counter ──────────────────────────────────────────────────────────
+// Per-browser/device count via localStorage (no server, no host cost).
+// Increments at most once per minute so the auto page-reload doesn't inflate it.
+(function bumpVisitCount() {
+  const KEY = "govcontracts_dashboard_visits";
+  const LAST_KEY = "govcontracts_dashboard_last_visit";
+  const now = Date.now();
+  const lastVisit = parseInt(localStorage.getItem(LAST_KEY) || "0", 10);
+  let count = parseInt(localStorage.getItem(KEY) || "0", 10);
+  if (!lastVisit || now - lastVisit > 60000) {
+    count += 1;
+    localStorage.setItem(KEY, String(count));
+    localStorage.setItem(LAST_KEY, String(now));
+  }
+  const el = document.getElementById("visitCount");
+  if (el) el.textContent = count.toLocaleString();
+})();
 </script>
 
 </body>
