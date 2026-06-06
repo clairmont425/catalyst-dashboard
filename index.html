@@ -169,11 +169,11 @@
 
 <h1>Government Contracts</h1>
 <div class="meta">
-  Last refresh: <b>2026-06-06 06:00:14 AM</b> ·
+  Last refresh: <b>2026-06-06 04:39:53 PM</b> ·
   Data window: last <b>7 days</b> ·
   Source: <a href="https://api.usaspending.gov/" style="color:#58a6ff">USAspending.gov</a> ·
   Auto-refreshes every 5 min ·
-  <b>2</b> small/mid-cap tickers from <b>2</b> awards ·
+  <b>3</b> small/mid-cap tickers from <b>3</b> awards ·
   Visits: <b id="visitCount">&mdash;</b>
 </div>
 
@@ -313,7 +313,7 @@
 
 
 <script>
-const ROWS = [{"ticker": "PRM", "company": "PERIMETER SOLUTIONS LP", "mc": 4919912195, "cap_cls": "mid", "n": 1, "tot_amt": 50000000, "max_amt": 50000000, "pct_cap": 1.02, "price": 30.16, "d1": -1.11, "d5": -6.57, "d30": 10.03, "vol_x": 0.63, "range52": 78.6, "shortf": 2.75, "sector": "Basic Materials", "industry": "Specialty Chemicals", "agency": "Department of Agriculture", "details": [{"amt": 50000000, "pct": 1.02, "agency": "Department of Agriculture", "desc": "FAM RETARDANT - FULL SERVICE, 2026 IQ-NOCOMMIT", "date": "2026-01-01", "url": "https://www.usaspending.gov/award/CONT_AWD_1202SC26K2501_12C2_1202SC26T2500_12C2"}], "score": 21.0}, {"ticker": "SAIC", "company": "SCIENCE APPLICATIONS INTERNATIONAL CORPORATION", "mc": 4839638791, "cap_cls": "mid", "n": 1, "tot_amt": 6477888, "max_amt": 6477888, "pct_cap": 0.13, "price": 114.35, "d1": -1.9, "d5": 9.74, "d30": 21.18, "vol_x": 0.84, "range52": 78.6, "shortf": 7.44, "sector": "Technology", "industry": "Information Technology Services", "agency": "General Services Administration", "details": [{"amt": 6477888, "pct": 0.13, "agency": "General Services Administration", "desc": "MUNITIONS ITEMS DISPOSITION ACTION SYSTEM MIDAS RECOMPETE", "date": "2022-04-12", "url": "https://www.usaspending.gov/award/CONT_AWD_47QFWA22F0016_4732_GS00F002CA_4732"}], "score": 8.1}];
+const ROWS = [{"ticker": "LUMN", "company": "LUMEN TECHNOLOGIES GOVERNMENT SOLUTIONS, INC.", "mc": 9180071476, "cap_cls": "mid", "n": 1, "tot_amt": 183384822, "max_amt": 183384822, "pct_cap": 2.0, "price": 8.91, "d1": -10.0, "d5": -18.93, "d30": -9.17, "vol_x": 0.81, "range52": 64.6, "shortf": 6.55, "sector": "Communication Services", "industry": "Telecom Services", "agency": "Department of Agriculture", "details": [{"amt": 183384822, "pct": 2.0, "agency": "Department of Agriculture", "desc": "USDANET ENTERPRISE INFRASTRUCTURE SOLUTIONS", "date": "2021-12-16", "url": "https://www.usaspending.gov/award/CONT_AWD_12314422F0069_1205_GS00Q17NSD3006_4732"}], "score": 40.7}, {"ticker": "PRM", "company": "PERIMETER SOLUTIONS LP", "mc": 4919912195, "cap_cls": "mid", "n": 1, "tot_amt": 50000000, "max_amt": 50000000, "pct_cap": 1.02, "price": 30.16, "d1": -1.11, "d5": -6.57, "d30": 10.03, "vol_x": 0.63, "range52": 78.6, "shortf": 2.75, "sector": "Basic Materials", "industry": "Specialty Chemicals", "agency": "Department of Agriculture", "details": [{"amt": 50000000, "pct": 1.02, "agency": "Department of Agriculture", "desc": "FAM RETARDANT - FULL SERVICE, 2026 IQ-NOCOMMIT", "date": "2026-01-01", "url": "https://www.usaspending.gov/award/CONT_AWD_1202SC26K2501_12C2_1202SC26T2500_12C2"}], "score": 21.0}, {"ticker": "SAIC", "company": "SCIENCE APPLICATIONS INTERNATIONAL CORPORATION", "mc": 4834354188, "cap_cls": "mid", "n": 1, "tot_amt": 6477888, "max_amt": 6477888, "pct_cap": 0.13, "price": 114.35, "d1": -1.9, "d5": 9.74, "d30": 21.18, "vol_x": 0.84, "range52": 78.6, "shortf": 7.44, "sector": "Technology", "industry": "Information Technology Services", "agency": "General Services Administration", "details": [{"amt": 6477888, "pct": 0.13, "agency": "General Services Administration", "desc": "MUNITIONS ITEMS DISPOSITION ACTION SYSTEM MIDAS RECOMPETE", "date": "2022-04-12", "url": "https://www.usaspending.gov/award/CONT_AWD_47QFWA22F0016_4732_GS00F002CA_4732"}], "score": 8.1}];
 
 function fmtMoneyM(v) {
   if (v == null) return '<span class="mute">--</span>';
@@ -423,21 +423,35 @@ document.querySelectorAll('th.sortable').forEach(th => {
 applyFilters();
 
 // ── Visit counter ──────────────────────────────────────────────────────────
-// Per-browser/device count via localStorage (no server, no host cost).
-// Increments at most once per minute so the auto page-reload doesn't inflate it.
-(function bumpVisitCount() {
-  const KEY = "govcontracts_dashboard_visits";
-  const LAST_KEY = "govcontracts_dashboard_last_visit";
+// REAL GLOBAL count via Abacus (abacus.jasoncameron.dev) — a free, no-signup,
+// CORS-enabled counter. The increment happens on Abacus's side, so the number
+// is the true total across ALL visitors (not this device). Still costs nothing
+// to host: the visitor's browser makes the call. A 30-min per-device gate stops
+// the same tab (or rapid reloads) from inflating the global count — on a gated
+// load we just READ the current total instead of bumping it.
+(async function visitCounter() {
+  const NS = "clairmont425-dashboards";
+  const KEY = "govcontracts";
+  const GATE = "abacus_gate_" + KEY;
   const now = Date.now();
-  const lastVisit = parseInt(localStorage.getItem(LAST_KEY) || "0", 10);
-  let count = parseInt(localStorage.getItem(KEY) || "0", 10);
-  if (!lastVisit || now - lastVisit > 60000) {
-    count += 1;
-    localStorage.setItem(KEY, String(count));
-    localStorage.setItem(LAST_KEY, String(now));
-  }
+  const last = parseInt(localStorage.getItem(GATE) || "0", 10);
   const el = document.getElementById("visitCount");
-  if (el) el.textContent = count.toLocaleString();
+  const base = "https://abacus.jasoncameron.dev";
+  try {
+    let url;
+    if (!last || now - last > 1800000) {          // 30 min: count this visit once
+      url = `${base}/hit/${NS}/${KEY}`;
+      localStorage.setItem(GATE, String(now));
+    } else {
+      url = `${base}/get/${NS}/${KEY}`;           // already counted recently: just read
+    }
+    const r = await fetch(url, { cache: "no-store" });
+    const j = await r.json();
+    if (el && j && typeof j.value === "number") el.textContent = j.value.toLocaleString();
+    else if (el) el.textContent = "—";
+  } catch (e) {
+    if (el) el.textContent = "—";
+  }
 })();
 </script>
 
