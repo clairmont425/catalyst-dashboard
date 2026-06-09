@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Force the browser to revalidate the HTML so feature/data updates show up
+     without a manual hard-refresh (no stale cached copy). -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta http-equiv="refresh" content="300">
 <title>Government Contracts</title>
 <style>
@@ -169,11 +174,11 @@
 
 <h1>Government Contracts</h1>
 <div class="meta">
-  Last refresh: <b>2026-06-06 04:47:38 PM</b> ·
+  Last refresh: <b>2026-06-08 06:59:37 PM</b> ·
   Data window: last <b>7 days</b> ·
   Source: <a href="https://api.usaspending.gov/" style="color:#58a6ff">USAspending.gov</a> ·
   Auto-refreshes every 5 min ·
-  <b>3</b> small/mid-cap tickers from <b>3</b> awards ·
+  <b>0</b> small/mid-cap tickers from <b>0</b> awards ·
   Visits: <b id="visitCount">&mdash;</b>
 </div>
 
@@ -310,10 +315,10 @@
   </tbody>
 </table>
 
-
+<div class='empty'>No small/mid-cap catalysts in this window — try widening the date range.</div>
 
 <script>
-const ROWS = [{"ticker": "LUMN", "company": "LUMEN TECHNOLOGIES GOVERNMENT SOLUTIONS, INC.", "mc": 9180071476, "cap_cls": "mid", "n": 1, "tot_amt": 183384822, "max_amt": 183384822, "pct_cap": 2.0, "price": 8.91, "d1": -10.0, "d5": -18.93, "d30": -9.17, "vol_x": 0.81, "range52": 64.6, "shortf": 6.55, "sector": "Communication Services", "industry": "Telecom Services", "agency": "Department of Agriculture", "details": [{"amt": 183384822, "pct": 2.0, "agency": "Department of Agriculture", "desc": "USDANET ENTERPRISE INFRASTRUCTURE SOLUTIONS", "date": "2021-12-16", "url": "https://www.usaspending.gov/award/CONT_AWD_12314422F0069_1205_GS00Q17NSD3006_4732"}], "score": 40.7}, {"ticker": "PRM", "company": "PERIMETER SOLUTIONS LP", "mc": 4919912195, "cap_cls": "mid", "n": 1, "tot_amt": 50000000, "max_amt": 50000000, "pct_cap": 1.02, "price": 30.16, "d1": -1.11, "d5": -6.57, "d30": 10.03, "vol_x": 0.63, "range52": 78.6, "shortf": 2.75, "sector": "Basic Materials", "industry": "Specialty Chemicals", "agency": "Department of Agriculture", "details": [{"amt": 50000000, "pct": 1.02, "agency": "Department of Agriculture", "desc": "FAM RETARDANT - FULL SERVICE, 2026 IQ-NOCOMMIT", "date": "2026-01-01", "url": "https://www.usaspending.gov/award/CONT_AWD_1202SC26K2501_12C2_1202SC26T2500_12C2"}], "score": 21.0}, {"ticker": "SAIC", "company": "SCIENCE APPLICATIONS INTERNATIONAL CORPORATION", "mc": 4834354188, "cap_cls": "mid", "n": 1, "tot_amt": 6477888, "max_amt": 6477888, "pct_cap": 0.13, "price": 114.35, "d1": -1.9, "d5": 9.74, "d30": 21.18, "vol_x": 0.84, "range52": 78.6, "shortf": 7.44, "sector": "Technology", "industry": "Information Technology Services", "agency": "General Services Administration", "details": [{"amt": 6477888, "pct": 0.13, "agency": "General Services Administration", "desc": "MUNITIONS ITEMS DISPOSITION ACTION SYSTEM MIDAS RECOMPETE", "date": "2022-04-12", "url": "https://www.usaspending.gov/award/CONT_AWD_47QFWA22F0016_4732_GS00F002CA_4732"}], "score": 8.1}];
+const ROWS = [];
 
 function fmtMoneyM(v) {
   if (v == null) return '<span class="mute">--</span>';
